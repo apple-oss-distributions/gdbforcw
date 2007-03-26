@@ -84,7 +84,10 @@ typedef enum bfd_mach_o_load_command_type
     BFD_MACH_O_LC_LOAD_WEAK_DYLIB = 0x18,
     BFD_MACH_O_LC_SEGMENT_64 = 0x19,	/* 64-bit segment of this file to be mapped. */
     BFD_MACH_O_LC_ROUTINES_64 = 0x1a,    /* Address of the dyld init routine in a dylib.  */
-    BFD_MACH_O_LC_UUID = 0x1b             /* 128-bit UUID of the executable.  */
+    BFD_MACH_O_LC_UUID = 0x1b,             /* 128-bit UUID of the executable.  */
+    BFD_MACH_O_LC_RPATH = (0x1c | BFD_MACH_O_LC_REQ_DYLD),  /* runpath additions */
+    BFD_MACH_O_LC_CODE_SIGNATURE = 0x1d,
+    BFD_MACH_O_LC_SEGMENT_SPLIT_INFO = 0x1e
   }
 bfd_mach_o_load_command_type;
 
@@ -104,7 +107,9 @@ typedef enum bfd_mach_o_cpu_type
     BFD_MACH_O_CPU_TYPE_I860 = 15,
     BFD_MACH_O_CPU_TYPE_ALPHA = 16,
     BFD_MACH_O_CPU_TYPE_POWERPC = 18,
-    BFD_MACH_O_CPU_TYPE_POWERPC_64 = 18 | BFD_MACH_O_CPU_IS64BIT
+    BFD_MACH_O_CPU_TYPE_POWERPC_64 = 18 | BFD_MACH_O_CPU_IS64BIT,
+    BFD_MACH_O_CPU_TYPE_X86_64 = (BFD_MACH_O_CPU_TYPE_I386 | BFD_MACH_O_CPU_IS64BIT)
+
   }
 bfd_mach_o_cpu_type;
 

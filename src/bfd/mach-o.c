@@ -371,6 +371,10 @@ bfd_mach_o_convert_architecture (mtype, msubtype, type, subtype)
       *type = bfd_arch_i386;
       *subtype = bfd_mach_i386_i386;
       break;
+    case BFD_MACH_O_CPU_TYPE_X86_64:
+      *type = bfd_arch_i386;
+      *subtype = bfd_mach_x86_64;
+      break;
     case BFD_MACH_O_CPU_TYPE_MIPS: *type = bfd_arch_mips; break;
     case BFD_MACH_O_CPU_TYPE_MC98000: *type = bfd_arch_m98k; break;
     case BFD_MACH_O_CPU_TYPE_HPPA: *type = bfd_arch_hppa; break;
@@ -1875,6 +1879,9 @@ bfd_mach_o_scan_read_command (abfd, command)
     case BFD_MACH_O_LC_PREBIND_CKSUM:
     case BFD_MACH_O_LC_ROUTINES_64:
     case BFD_MACH_O_LC_UUID:
+    case BFD_MACH_O_LC_RPATH:
+    case BFD_MACH_O_LC_CODE_SIGNATURE:
+    case BFD_MACH_O_LC_SEGMENT_SPLIT_INFO:
       break;
     default:
       fprintf (stderr, "unable to read unknown load command 0x%lx\n",

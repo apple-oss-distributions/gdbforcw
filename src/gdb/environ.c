@@ -135,6 +135,18 @@ smuggle_dyld_settings (struct environ *e)
      }
 }
 
+/* Set DYLD_SHARED_REGION=avoid in the inferior process so it will
+   (hopefully) run without the shared cache region being used.  The
+   shared cache region means we have to deal with different text and
+   data slide values and we won't be updating this version of gdb to
+   do that correctly.  */
+
+void
+disable_shared_cache (struct environ *e)
+{
+  set_in_environ (e, "DYLD_SHARED_REGION", "avoid");
+}
+
 /* Return the vector of environment E.
    This is used to get something to pass to execve.  */
 

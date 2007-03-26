@@ -1,5 +1,5 @@
 GDB_VERSION = 6.1-20040303
-GDB_RC_VERSION = 441.2
+GDB_RC_VERSION = 443
 
 BINUTILS_VERSION = 2.13-20021117
 BINUTILS_RC_VERSION = 46
@@ -319,18 +319,14 @@ install-gdb-fat: install-gdb-common
 # don't halt the build. 
 
 install-chmod-macosx:
-	set -e;	if [ `whoami` = 'root' ]; then \
-		for dstroot in $(SYMROOT) $(DSTROOT); do \
+	set -e;	for dstroot in $(SYMROOT) $(DSTROOT); do \
 			chown -R root:wheel $${dstroot}; \
 			chmod -R  u=rwX,g=rX,o=rX $${dstroot}; \
 			chmod a+x $${dstroot}/$(LIBEXEC_GDB_DIR)/*; \
-		done; \
-	fi
-	-set -e; if [ `whoami` = 'root' ]; then \
-		for dstroot in $(SYMROOT) $(DSTROOT); do \
+		done
+	set -e; for dstroot in $(SYMROOT) $(DSTROOT); do \
 			chgrp procmod $${dstroot}/$(LIBEXEC_GDB_DIR)/gdb* && chmod g+s $${dstroot}/$(LIBEXEC_GDB_DIR)/gdb*; \
-		done; \
-	fi
+		done
 
 install-source:
 	$(INSTALL) -c -d $(DSTROOT)/$(SOURCE_DIR)
@@ -415,5 +411,11 @@ installsrc:
 
 
 check:
-	@[ -z `find . -name \*~ -o -name .\#\*` ] || \
-		(echo 'Emacs (*~) or CVS backup files (.#*) present; not copying.  Suggest:' && echo "  " find . -type f -name .#\\\* -exec rm -f '{}' \\\; -print && exit 1)
+	@[ -z "`find . -name \*~ -o -name .\#\*`" ] || \
+	   (echo; echo 'Emacs or CVS backup files present; not copying:'; \
+	   find . \( -name \*~ -o -name .#\* \) -print | sed 's,^[.]/,  ,'; \
+	   echo Suggest: ; \
+	   echo '    ' find . \\\( -name \\\*~ -o -name .#\\\* \\\) -exec rm -f \{\} \\\; -print ; \
+	   echo; \
+	   exit 1)
+

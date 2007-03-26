@@ -848,6 +848,10 @@ macosx_solib_add (const char *filename, int from_tty,
 
       breakpoint_update ();
 
+      /* Try initializing the cfm runtime again if CarbonCore just got
+         loaded.  */
+      macosx_cfm_init (cfm_status);
+
       notify = libraries_changed && dyld_stop_on_shlibs_updated;
     }
   else if (dyld_status->dyld_breakpoint != NULL)

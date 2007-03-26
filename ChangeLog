@@ -1,3 +1,21 @@
+2007-03-05  Jason Molenda  (jmolenda@apple.com)
+
+	* Makefile (check): Use the new check command from TOT.
+
+2007-03-05  Jason Molenda  (jmolenda@apple.com)
+
+	* Makefile (install-chmod-macosx): Don't error out if chgrp procmod 
+	fails.
+
+2007-03-05  Jason Molenda  (jmolenda@apple.com)
+
+	* Makefile (install-chmod-macosx): Fix typeo in last change.
+
+2007-03-02  Jason Molenda  (jmolenda@apple.com)
+
+	* Makefile (install-chmod-macosx): Don't check whoami(1) output before
+	doing chmod.  This file is run as root.
+
 2006-04-13  Jason Molenda  (jmolenda@apple.com)
 
 	* Makefile: Take out all the cross debugger building, the

@@ -144,8 +144,8 @@ LIBICONV = @LIBICONV@
 
 # APPLE LOCAL: location of libxml header files & libraries
 
-LIBXML2_CFLAGS = @LIBXML2_INCLUDES@
-LIBXML2_LDFLAGS = @LIBXML2_LIBS@
+LIBXML2_CFLAGS =
+LIBXML2_LDFLAGS =
 
 # APPLE LOCAL: switch over to the pre-conformance header files.
 UNIX03_UGH_CFLAGS = @UNIX03_UGH_CFLAGS@

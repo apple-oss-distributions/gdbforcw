@@ -2234,4 +2234,5 @@ Register name as argument means describe only that register.");
 
   /* APPLE LOCAL */
   smuggle_dyld_settings (inferior_environ);
+  disable_shared_cache (inferior_environ);
 }

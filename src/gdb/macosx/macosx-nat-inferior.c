@@ -70,10 +70,6 @@
 #include <sys/param.h>
 #include <sys/sysctl.h>
 #include <mach/mach_error.h>
-#if defined (LIBXML2_IS_USABLE)
-#include <libxml/parser.h>
-#include <libxml/tree.h>
-#endif
 
 #ifndef EXC_SOFT_SIGNAL
 #define EXC_SOFT_SIGNAL 0
@@ -226,10 +222,6 @@ static void macosx_set_auto_start_dyld (char *args, int from_tty,
                                         struct cmd_list_element *c);
 
 static const char *get_bundle_executable_from_plist (const char *pathname);
-
-#if defined (LIBXML2_IS_USABLE)
-static const char *find_executable_name_in_xml_tree (xmlNode * a_node);
-#endif
 
 static void
 macosx_handle_signal (macosx_signal_thread_message *msg,
@@ -2360,82 +2352,8 @@ macosx_filename_in_bundle (const char *filename, int mainline)
 static const char *
 get_bundle_executable_from_plist (const char *pathname)
 {
-#if !defined (LIBXML2_IS_USABLE)
   return NULL;
-#else
-  xmlDoc *doc = NULL;
-  xmlNode *root_element = NULL;
-  char *info_plist_name;
-  const char *exe_name = NULL;
-  struct stat s;
-
-  LIBXML_TEST_VERSION
-    info_plist_name =
-    xmalloc (strlen (pathname) + strlen ("/Info.plist") + 1);
-  strcpy (info_plist_name, pathname);
-  strcat (info_plist_name, "/Info.plist");
-
-  if (stat (info_plist_name, &s) != 0)
-    return NULL;
-
-  doc = xmlParseFile (info_plist_name);
-
-  xfree (info_plist_name);
-  if (doc == NULL)
-    return NULL;
-
-  root_element = xmlDocGetRootElement (doc);
-  if (root_element != NULL)
-    exe_name = find_executable_name_in_xml_tree (root_element);
-
-  xmlFreeDoc (doc);
-  xmlCleanupParser ();
-
-  return exe_name;
-#endif
 }
-
-/* Step through a libxml2 XML tree to find a CFBundleExecutable
-   key/value pair indicating the name of the executable in an
-   application bundle.  It'd be nice if there were a higher
-   level way of doing this but I don't want to add any
-   dependencies on Foundation-like things.. */
-
-#if defined (LIBXML2_IS_USABLE)
-static const char *
-find_executable_name_in_xml_tree (xmlNode * a_node)
-{
-  xmlNode *cur_node = NULL;
-  int just_saw_CFBundleExecutable = 0;
-  const char *ret;
-
-  for (cur_node = a_node; cur_node; cur_node = cur_node->next)
-    {
-      if (cur_node->type == XML_ELEMENT_NODE && cur_node->name)
-        {
-          xmlChar *contents = xmlNodeGetContent (cur_node);
-          if (strcmp (cur_node->name, "key") == 0
-              && strcmp (contents, "CFBundleExecutable") == 0)
-            {
-              just_saw_CFBundleExecutable = 1;
-              continue;
-            }
-          if (strcmp (cur_node->name, "string") == 0
-              && just_saw_CFBundleExecutable == 1)
-            {
-              return (const char *) contents;
-            }
-          just_saw_CFBundleExecutable = 0;
-        }
-      ret = find_executable_name_in_xml_tree (cur_node->children);
-      if (ret != NULL)
-        return ret;
-    }
-  return (NULL);
-}
-#endif
-
-
 
 char *unsafe_functions[] = {
   "malloc",

@@ -62,10 +62,7 @@ macosx_cfm_thread_create (macosx_cfm_thread_status *s)
   if (s->info_api_cookie == 0)
     return;
 
-  snprintf (buf, 64, "PrepareClosure + %s",
-            core_addr_to_string (s->breakpoint_offset));
-  s->notify_debugger =
-    lookup_address ("PrepareClosure") + s->breakpoint_offset;
+  s->notify_debugger = lookup_address ("NotifyDebugger");
 
   init_sal (&sal);
   sal.pc = s->notify_debugger;

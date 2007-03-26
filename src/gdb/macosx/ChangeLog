@@ -1,3 +1,17 @@
+2007-03-26  Jason Molenda  (jmolenda@apple.com)
+
+	* macosx-nat-inferior.c: Don't use libxml.
+	(macosx_filename_in_bundle): Ditto.
+	(find_executable_name_in_xml_tree): Ditto.
+
+2007-02-23  Jason Molenda  (jmolenda@apple.com)
+
+	* macosx-nat-cfmthread.c (macosx_cfm_thread_create): Put CFM 
+	notification breakpoint on NotifyDebugger instead of PrepareClosure
+	plus a hardcoded offset.
+	* macosx-nat-dyld.c (macosx_solib_add): Retry cfm initialization
+	after latest dylibs have loaded in case CarbonCore was among them.
+
 2006-05-30  Jason Molenda  (jmolenda@apple.com)
 
         * macosx-nat-dyld.c (macosx_locate_dyld) PORT_NULL -> MACH_PORT_NULL.

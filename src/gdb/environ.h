@@ -42,6 +42,7 @@ extern void init_environ (struct environ *);
 
 /* APPLE LOCAL */
 void smuggle_dyld_settings (struct environ *e);
+void disable_shared_cache (struct environ *e);
 
 extern char *get_in_environ (const struct environ *, const char *);
 

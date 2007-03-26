@@ -1,3 +1,15 @@
+2007-03-26  Jason Molenda  (jmolenda@apple.com)
+
+	* configure.in: Remove tests for libxml; hardcode it as unavailable.
+	* Makefile.in: Set LIBXML2_CFLAGS and LIBXML2_LDFLAGS to null.
+	* configure: Regenerated.
+
+2007-02-23  Jason Molenda  (jmolenda@apple.com)
+
+	* environ.c (disable_shared_cache): New func.
+	* environ.h (disable_shared_cache): Prototype.
+	* infcmd.c (_initialize_infcmd): Call disable_shared_cache.
+
 2006-06-02  Jason Molenda  (jmolenda@apple.com)
 
 	* Makefile.in (UNIX03_UGH_CFLAGS): New CFLAGS to disable the

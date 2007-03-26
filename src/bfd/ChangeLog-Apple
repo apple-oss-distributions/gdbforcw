@@ -1,3 +1,18 @@
+2007-03-26  Jason Molenda  (jmolenda@apple.com)
+
+	* mach-o.h: Add BFD_MACH_O_LC_RPATH, BFD_MACH_O_LC_CODE_SIGNATURE.
+	* mach-o.c (bfd_mach_o_scan_read_command): Skip over
+	BFD_MACH_O_LC_RPATH, BFD_MACH_O_LC_CODE_SIGNATURE load commands.
+
+2007-02-23  Jason Molenda  (jmolenda@apple.com)
+
+	* mach-o.h (bfd_mach_o_load_command_type): Add 
+	BFD_MACH_O_LC_SEGMENT_SPLIT_INFO.
+	(bfd_mach_o_cpu_type): Add BFD_MACH_O_CPU_TYPE_X86_64.
+	* mach-o.c (bfd_mach_o_convert_architecture): Recognize 
+	BFD_MACH_O_CPU_TYPE_X86_64.
+	(bfd_mach_o_scan_read_command): Ignore BFD_MACH_O_LC_SEGMENT_SPLIT_INFO.
+
 2006-01-11  Jason Molenda  (jmolenda@apple.com)
 
 	* mach-o.h (bfd_mach_o_load_command_type): Add BFD_MACH_O_LC_UUID.
