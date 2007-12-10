@@ -1,5 +1,5 @@
 GDB_VERSION = 6.1-20040303
-GDB_RC_VERSION = 443
+GDB_RC_VERSION = 444
 
 BINUTILS_VERSION = 2.13-20021117
 BINUTILS_RC_VERSION = 46
@@ -170,7 +170,7 @@ ifneq ($(findstring macosx,$(CANONICAL_ARCHS))$(findstring darwin,$(CANONICAL_AR
 CC = cc -arch $(HOST_ARCHITECTURE)
 CC_FOR_BUILD = NEXT_ROOT= cc
 CDEBUGFLAGS = -g -Os -mdynamic-no-pic
-CFLAGS = $(strip $(RC_CFLAGS_NOARCH) $(CDEBUGFLAGS) -Wall -Wimplicit -Wno-long-double)
+CFLAGS = $(strip $(RC_CFLAGS_NOARCH) $(CDEBUGFLAGS) -Wall -Wimplicit)
 HOST_ARCHITECTURE = $(shell echo $* | sed -e 's/--.*//' -e 's/powerpc/ppc/' -e 's/-apple-macosx.*//' -e 's/-apple-macos.*//' -e 's/-apple-darwin.*//')
 endif
 

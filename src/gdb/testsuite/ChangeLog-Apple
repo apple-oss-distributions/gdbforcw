@@ -1,3 +1,11 @@
+2007-12-05  Jim Ingham  <jingham@apple.com>
+
+	* gdb.base/sizeof.exp: gcc-4.2 doesn't accept -Wno-long-double
+	* gdb.base/store.exp: ditto
+	* gdb.base/structs.exp: ditto
+	* gdb.cp/gdb1355.exp: ditto
+	* gdb.cp/templates.exp: ditto
+	
 2005-10-11  Jim Ingham  <jingham@apple.com>
 
 	* gdb.base/psymtab.exp: "set breakpoint pending off" before

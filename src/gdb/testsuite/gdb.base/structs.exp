@@ -70,7 +70,9 @@ proc start_structs_test { types } {
 	lappend flags "additional_flags=-Dt${m}=${t}"
 	append testfile "-" "$t"
     }
-    if {[istarget "*-apple-darwin*"]} {
+    # APPLE LOCAL: Only gcc-4.0 accepts -Wno-long-double, 4.2 & above do not.
+    get_compiler_info not_used
+    if {[istarget "*-apple-darwin*"] && [regexp {gcc-4-[01]} $compiler_info]} {
 	lappend flags "additional_flags=-Wno-long-double"
     }
 

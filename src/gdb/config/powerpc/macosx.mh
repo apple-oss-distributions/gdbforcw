@@ -54,7 +54,7 @@ CFM_CFLAGS = -DWITH_CFM=1
 
 CFM_LIBS = 
 
-MH_CFLAGS += -DUSE_PTHREADS=1 -Wall -Wimplicit -Wno-long-double
+MH_CFLAGS += -DUSE_PTHREADS=1 -Wall -Wimplicit
 
 _all: all
 

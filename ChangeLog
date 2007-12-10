@@ -1,3 +1,8 @@
+2007-12-05  Jim Ingham  <jingham@apple.com>
+
+	* Makefile: Remove -Wno-long-double from Makefile, it is not supported
+	by gcc-4.2.
+	
 2007-03-05  Jason Molenda  (jmolenda@apple.com)
 
 	* Makefile (check): Use the new check command from TOT.
